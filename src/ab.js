@@ -186,7 +186,41 @@ ab.loader = {
 		$('body').append(img);
 		return deferred.promise();
 	},
+	
+	/**
+	 * <iframe> loader, does not support POST, but measures performance of the onload of the url
+	 * 
+	 * same-origin policy does not apply
+	 * @param params
+	 * @returns
+	 */
+	 IframeLoader: function (params) {
+		var now = new Date().getTime(), parser = document.createElement('a');
+		parser.href = params.url;
+		if((params.cache | false) == false) {
+			if(parser.search) {
+				params.url += "&_=" + now;
+			} else {
+				params.url += "?_=" + now;
+			}
+		}
+		
+		var data = {
+			requestStartTime : now,
+			requestEndTime : null
+		}, deferred = $.Deferred(), callback = function() {
+			img.remove();
+			data.requestEndTime = new Date().getTime();
+			deferred.resolve(null, null, data);
+		}, img = $('<iframe style="display:none"></iframe>');
+		
+		img.load(callback).error(callback).attr({
+			"src" : params.url
+		});
 
+		$('body').append(img);
+		return deferred.promise();
+	},
 	/**
 	 * XMLHttpRequest loader
 	 * 
@@ -202,12 +236,17 @@ ab.loader = {
 			status: null,
 			statusText: null
 		};
-		$.ajax(params).then(function(dataIn, textStatus, jqXHRIn) {
+		$.ajax(params).done(function(dataIn, textStatus, jqXHR) {
 			data.requestEndTime = new Date().getTime();
-			data.status = jqXHRIn.status;
-			data.statusText = jqXHRIn.statusText;
+			data.status = jqXHR.status;
+			data.statusText = jqXHR.statusText;
+			deferred.resolve(null, null, data);
+		}).fail(function(jqXHR, textStatus, dataIn) {
+			data.requestEndTime = new Date().getTime();
+			data.status = jqXHR.status;
+			data.statusText = jqXHR.statusText;
 			deferred.resolve(null, null, data);
 		});
 		return deferred.promise();
 	}
-}
+};
