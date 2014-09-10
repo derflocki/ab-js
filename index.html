@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="application-name" content="ab-js">
+<meta name="msapplication-tooltip" content="ab-js">
 <script src="src/ab.js"></script>
 <script src="//code.jquery.com/jquery-1.10.1.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
 	<header class="jumbotron">
 		<div class="container">
 			<h1>ab-js</h1>
-			<p class="lead">Benchmark your HTTP server &ndash; in your
-				browser.</p>
-			<iframe
-				src="http://ghbtns.com/github-btn.html?user=derflocki&amp;repo=ab-js&amp;type=watch&amp;count=true"
-				style="width: 110px; height: 20px; border: 0"></iframe>
-			<iframe
-				src="http://ghbtns.com/github-btn.html?user=derflocki&amp;repo=ab-js&amp;type=fork&amp;count=true"
-				style="width: 95px; height: 20px; border: 0"></iframe>
-			<iframe
-				src="http://ghbtns.com/github-btn.html?user=derflocki&amp;type=follow&amp;count=true"
-				style="width: 165px; height: 20px; border: 0"></iframe>
+			<p class="lead">Benchmark your HTTP server &ndash; in your browser.</p>
+			<iframe src="http://ghbtns.com/github-btn.html?user=derflocki&amp;repo=ab-js&amp;type=watch&amp;count=true" style="width: 110px; height: 20px; border: 0"></iframe>
+			<iframe src="http://ghbtns.com/github-btn.html?user=derflocki&amp;repo=ab-js&amp;type=fork&amp;count=true" style="width: 95px; height: 20px; border: 0"></iframe>
+			<iframe src="http://ghbtns.com/github-btn.html?user=derflocki&amp;type=follow&amp;count=true" style="width: 165px; height: 20px; border: 0"></iframe>
 		</div>
 	</header>
 	<div class="container">
@@ -30,74 +28,67 @@
 			<form class="form-horizontal" role="form">
 				<div class="form-group">
 					<div class="row">
-					<div class="col-xs-9">
-						<label for="ab-url">Url</label>
-							<input class="form-control"
-							type="text" id="ab-url" placeholder="url" />
+						<div class="col-xs-9">
+							<label for="ab-url">Url</label> <input class="form-control" type="text" id="ab-url" placeholder="url" />
 						</div>
-					<div class="col-xs-3">
-							<label for="ab-type">Type</label>
-							<select id="ab-type" class="form-control">
+						<div class="col-xs-3">
+							<label for="ab-type">Type</label> <select id="ab-type" class="form-control">
 								<option value="AjaxLoader">ajax</option>
 								<option value="IframeLoader">iframe</option>
 								<option value="ImgLoader">img</option>
 							</select>
 							<button type="button" class="ab-loader-showhelp btn btn-link">Show Help</button>
-					</div>
+						</div>
 					</div>
 					<div class="row">
-					<div class="col-lg-12">
-						<span class="help-block hidden ab-loader-help">
-							<dl>
-								<dt>ajax</dt>
-								<dd>GET and <strong>POST</strong>, but is subject to the same origin policy</dd>
-								<dt>iframe</dt>
-								<dd>only GET, is subject to the by the same origin policy. <strong>Measures document.load</strong></dd>
-								<dt>img</dt>
-								<dd>img supports only GET. <strong>It works accross domains</strong></dd>
-							</dl>
-						</span>
-					</div>
+						<div class="col-lg-12">
+							<span class="help-block hidden ab-loader-help">
+								<dl>
+									<dt>ajax</dt>
+									<dd>
+										GET and <strong>POST</strong>, but is subject to the same origin policy
+									</dd>
+									<dt>iframe</dt>
+									<dd>
+										only GET, is subject to the by the same origin policy. <strong>Measures document.load</strong>
+									</dd>
+									<dt>img</dt>
+									<dd>
+										img supports only GET. <strong>It works accross domains</strong>
+									</dd>
+								</dl>
+							</span>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class=" col-xs-6">
-						<label for="ab-requests">Requests</label> <input
-							class="form-control" type="text" id="ab-requests"
-							placeholder="Number of requests to perform" value="10" />
+						<label for="ab-requests">Requests</label> <input class="form-control" type="text" id="ab-requests" placeholder="Number of requests to perform" value="10" />
 					</div>
 					<div class=" col-xs-6">
-						<label for="ab-concurrency">Concurrency</label> <input
-							class="form-control" type="text" id="ab-concurrency"
-							placeholder="Number of multiple requests to make" value="1" />
+						<label for="ab-concurrency">Concurrency</label> <input class="form-control" type="text" id="ab-concurrency" placeholder="Number of multiple requests to make" value="1" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-8">
-						<button class="btn btn-primary btn-block" type="button"
-							id="ab-do-bench">Benchmark</button>
+						<button class="btn btn-primary btn-block" type="button" id="ab-do-bench">Benchmark</button>
 					</div>
 					<div class="col-xs-4">
-						<button class="btn btn-warning btn-block" type="button"
-							id="ab-clear-results">Clear Results</button>
+						<button class="btn btn-warning btn-block" type="button" id="ab-clear-results">Clear Results</button>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-lg-12">
 						<label for="ab-requests">POST-Data</label>
-						<textarea class="form-control" rows="1" id="ab-post-data"
-							placeholder="leave blank to perform a GET-request"></textarea>
-						<span class="help-block hidden ab-requests-help">POST-requests
-							require the <strong>AjaxLoader</strong>
+						<textarea class="form-control" rows="1" id="ab-post-data" placeholder="leave blank to perform a GET-request"></textarea>
+						<span class="help-block hidden ab-requests-help">POST-requests require the <strong>AjaxLoader</strong>
 						</span>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-lg-12">
 						<div class="checkbox">
-							<label for="ab-onload"> <input type="checkbox"
-								id="ab-onload" value="on" /> Measure Page on-load (enforces
-								HTTP-GET)</strong>
+							<label for="ab-onload"> <input type="checkbox" id="ab-onload" value="on" /> Measure Page on-load (enforces HTTP-GET)</strong>
 							</label>
 						</div>
 					</div>
@@ -124,7 +115,7 @@
 		$(document).ready(function () {
 			var same_origin_url = false;
 			var measure_page_onload = false;
-			$('.ab-loader-showhelp').click(function(e) {
+			$('.ab-loader-showhelp').click(function (e) {
 				$('.ab-loader-help').removeClass("hidden");
 			});
 			function isSameOrigin (testUrl) {
@@ -133,20 +124,20 @@
 					type : "HEAD",
 					url : testUrl,
 					async : false,
-				}).always(function(dataIn, textStatus, jqXHR) {
-					if(jqXHR.status !== 200) {
+				}).always(function (dataIn, textStatus, jqXHR) {
+					if (jqXHR.status !== 200) {
 						sameOrigin(false);
 					} else {
 						sameOrigin(true);
 					}
 				});
 			}
-			function sameOrigin(ok) {
+			function sameOrigin (ok) {
 				same_origin_url = ok;
 				processInputs();
 			}
-			function processInputs() {
-				if(same_origin_url) {
+			function processInputs () {
+				if (same_origin_url) {
 					$('#ab-post-data').removeAttr("disabled");
 					$('#ab-onload').removeAttr("disabled");
 					if (measure_page_onload) {
@@ -162,11 +153,11 @@
 				}
 				
 				allow_all = same_origin_url && !measure_page_onload;
-				$('#ab-type option').each(function() {
-					if(allow_all) {
+				$('#ab-type option').each(function () {
+					if (allow_all) {
 						this.removeAttribute("disabled");
 					} else {
-						if(this.getAttribute('value') == "ImgLoader") {
+						if (this.getAttribute('value') == "ImgLoader") {
 							this.removeAttribute("disabled");
 						} else {
 							this.setAttribute("disabled", "disabled");
@@ -176,7 +167,7 @@
 				$('#ab-do-bench').removeAttr("disabled");
 			}
 			$("#ab-onload").change(function (e) {
-				var self = this; 
+				var self = this;
 				measure_page_onload = this.checked;
 				processInputs();
 			});
